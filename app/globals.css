@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ieee-blue: #00629B;
+  --ieee-light-blue: #0096D6;
+  --ieee-teal: #00B5E2;
+  --ieee-steel: #00629B;
+  --ieee-light-steel: #90A4AE;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom right,
+    var(--ieee-light-blue),
+    var (--ieee-teal)
+  );
+}
+
+.neumorphic {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+              -5px -5px 10px rgba(255, 255, 255, 0.5);
+}
+
+.neumorphic-inset {
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+              inset -5px -5px 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 15s ease-in-out infinite;
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(50, 197, 255);
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+};
