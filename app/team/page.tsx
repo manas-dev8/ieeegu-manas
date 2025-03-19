@@ -49,8 +49,8 @@ const boardMembers: TeamMember[] = [
     name: "Siddharth Agrawal",
     role: "Treasurer in General",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005304/sidharth_de2vhl.png",
-    bio: "John is a final year Computer Science student with a passion for AI and robotics.",
-    email: "As Treasurer, Siddharth manages the financial operations of the IEEE Student Branch. He handles budgeting, expense tracking, and funding allocation to support the branch's activities effectively."
+    bio: "As Treasurer, Siddharth manages the financial operations of the IEEE Student Branch. He handles budgeting, expense tracking, and funding allocation to support the branch's activities effectively.",
+    email: "siddharthaagrawal07@ieee.org"
   },
   // Add 4 more board members here
 ];
