@@ -34,7 +34,7 @@ export default function BlogLayout({
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       
-      <div className="bg-white dark:bg-gray-900 transition-colors duration-200">
+      <div className="bg-white pt-10 dark:bg-gray-900 transition-colors duration-200">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -45,7 +45,7 @@ export default function BlogLayout({
                 Latest insights, articles and news from our community
               </p>
             </div>
-            <ModeToggle />
+            
           </div>
           
           {showCategories && categories.length > 0 && (
