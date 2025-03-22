@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,7 +47,7 @@ export default function AuthorCard({ author, showFullBio = false }: AuthorCardPr
         </Link>
         
         {author.organization && (
-          <Link href={`/blog/organization/${author.organization.slug}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+          <Link href={`/blog/organization/${author.organization.slug}`} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
             {author.organization.name}
           </Link>
         )}
@@ -56,6 +58,11 @@ export default function AuthorCard({ author, showFullBio = false }: AuthorCardPr
               <PortableText value={author.bio} />
             ) : (
               <PortableText value={author.bio.slice(0, 1)} />
+            )}
+            {!showFullBio && author.bio.length > 1 && (
+              <Link href={`/blog/author/${author.slug}`} className="text-blue-600 dark:text-blue-400 inline-block mt-2 hover:underline">
+                Read more about {author.name}
+              </Link>
             )}
           </div>
         )}

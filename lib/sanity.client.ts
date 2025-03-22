@@ -62,8 +62,13 @@ export async function getPost(slug: string) {
       title,
       "slug": slug.current,
       publishedAt,
+      excerpt,
+      mainImage,
       body,
-      "categories": categories[]->title
+      "categories": categories[]->{ _id, title, "slug": slug.current },
+      "authors": authors[]->{ _id, name, "slug": slug.current, image, bio, "organization": organization->{
+        _id, name, "slug": slug.current
+      }, socialLinks }
     }`,
     { slug },
     {
@@ -220,4 +225,52 @@ export async function triggerRevalidation(slug?: string) {
     console.error('Revalidation error:', error)
     return false
   }
+}
+
+export async function getOrganization(slug: string) {
+  return client.fetch(
+    `*[_type == "organization" && slug.current == $slug][0] {
+      _id,
+      name,
+      "slug": slug.current,
+      logo,
+      description,
+      website,
+      "authors": *[_type == "author" && references(^._id)] {
+        _id,
+        name,
+        "slug": slug.current,
+        image
+      },
+      "posts": *[_type == "post" && references(*[_type=="author" && organization._ref == ^._id]._id)] | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        publishedAt,
+        excerpt,
+        mainImage,
+        "authors": authors[]->{ _id, name, "slug": slug.current, image }
+      }
+    }`,
+    { slug },
+    {
+      next: { revalidate: REVALIDATE_INTERVAL }
+    }
+  )
+}
+
+export async function getOrganizations() {
+  return client.fetch(
+    `*[_type == "organization"] {
+      _id,
+      name,
+      "slug": slug.current,
+      logo,
+      website
+    }`,
+    {},
+    {
+      next: { revalidate: REVALIDATE_INTERVAL }
+    }
+  )
 }

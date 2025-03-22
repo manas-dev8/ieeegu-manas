@@ -1,0 +1,2 @@
+# This is an empty file to ensure the pages directory exists
+# We're using App Router, but Next.js is still looking for this directory

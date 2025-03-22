@@ -1,5 +1,6 @@
+"use client";
+
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { Category } from '../types';
 import CategoryList from './CategoryList';
@@ -22,39 +23,40 @@ export default function BlogLayout({
   activeCategory,
   showCategories = true
 }: BlogLayoutProps) {
-  const fullTitle = title === 'IEEE GU Blog' ? title : `${title} | IEEE GU Blog`;
+  // For App Router we don't need Head component anymore, but we keep the prop for metadata in page components
   
   return (
-    <>
-      <Head>
-        <title>{fullTitle}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={fullTitle} />
-        <meta property="og:description" content={description} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-      
-      <div className="bg-white pt-10 dark:bg-gray-900 transition-colors duration-200">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <Link href="/blog" className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 hover:underline">
-                IEEE GU Blog
-              </Link>
-              <p className="mt-2 text-base md:text-lg text-gray-600 dark:text-gray-300">
-                Latest insights, articles and news from our community
-              </p>
-            </div>
-            
+    <div className="bg-white dark:bg-gray-900 transition-colors duration-200 min-h-screen pb-16">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <Link href="/blog" className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 hover:underline">
+              IEEE GU Blog
+            </Link>
+            <p className="mt-2 text-base md:text-lg text-gray-600 dark:text-gray-300">
+              Latest insights, articles and news from our community
+            </p>
           </div>
-          
-          {showCategories && categories.length > 0 && (
-            <CategoryList categories={categories} activeCategory={activeCategory} />
-          )}
-          
-          <main className="pt-4">{children}</main>
+          <ModeToggle />
+        </div>
+        
+        {showCategories && categories.length > 0 && (
+          <CategoryList categories={categories} activeCategory={activeCategory} />
+        )}
+        
+        <main className="pt-4">{children}</main>
+        
+        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex justify-between items-center">
+            <Link href="/blog" className="text-blue-600 dark:text-blue-400 hover:underline">
+              &larr; Back to all articles
+            </Link>
+            <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline">
+              Return to IEEE GU homepage
+            </Link>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
