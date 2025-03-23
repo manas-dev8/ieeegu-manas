@@ -2,8 +2,9 @@ import React from 'react';
 import { Metadata } from 'next';
 import BlogLayout from '@/components/BlogLayout';
 import BlogCard from '@/components/BlogCard';
-import { getPosts, getCategories, getFeaturedPosts } from '@/lib/sanity.client';
-import { Post, Category } from '@/types';
+import FeaturedPostsSection from '@/components/blog/FeaturedPostsSection';
+import LatestPostsSection from '@/components/blog/LatestPostsSection';
+import { BlogService } from '@/services/blog.service';
 
 export const metadata: Metadata = {
   title: 'IEEE GU Blog',
@@ -13,41 +14,14 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogPage() {
-  const [posts, categories, featuredPosts] = await Promise.all([
-    getPosts(12), // Get 12 most recent posts
-    getCategories(),
-    getFeaturedPosts(4) // Get 4 featured posts
-  ]);
+  // Use service layer to fetch data
+  const { posts, categories, featuredPosts } = await BlogService.getBlogHomeData();
   
   return (
     <BlogLayout categories={categories}>
-      {/* Featured Posts Section */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Featured Articles</h2>
-        <div className="grid grid-cols-1 gap-8">
-          {featuredPosts[0] && (
-            <BlogCard post={featuredPosts[0]} variant="large" />
-          )}
-          
-          {featuredPosts.length > 1 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredPosts.slice(1).map((post: Post) => (
-                <BlogCard key={post._id} post={post} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-      
-      {/* Recent Posts Section */}
-      <section>
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Latest Articles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post: Post) => (
-            <BlogCard key={post._id} post={post} />
-          ))}
-        </div>
-      </section>
+      {/* Split into component sections for better organization */}
+      <FeaturedPostsSection posts={featuredPosts} />
+      <LatestPostsSection posts={posts} />
     </BlogLayout>
   );
 }

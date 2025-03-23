@@ -10,9 +10,10 @@ import { Post } from '../types';
 interface BlogCardProps {
   post: Post;
   variant?: 'small' | 'medium' | 'large';
+  isHighlighted?: boolean;
 }
 
-export default function BlogCard({ post, variant = 'medium' }: BlogCardProps) {
+export default function BlogCard({ post, variant = 'medium', isHighlighted = false }: BlogCardProps) {
   const { title, slug, publishedAt, mainImage, excerpt, authors, estimatedReadingTime } = post;
   const formattedDate = format(new Date(publishedAt), 'MMM dd, yyyy');
   
@@ -20,7 +21,9 @@ export default function BlogCard({ post, variant = 'medium' }: BlogCardProps) {
     return (
       <Link 
         href={`/blog/${slug}`} 
-        className="group flex flex-col h-full hover:opacity-90 transition-opacity rounded-lg"
+        className={`group flex flex-col h-full hover:opacity-90 transition-opacity rounded-lg ${
+          isHighlighted ? 'ring-2 ring-blue-500 dark:ring-blue-400 shadow-md' : ''
+        }`}
       >
         <div className="relative w-full aspect-[16/9] mb-3 overflow-hidden rounded-lg">
           {mainImage ? (
@@ -49,7 +52,11 @@ export default function BlogCard({ post, variant = 'medium' }: BlogCardProps) {
     return (
       <Link 
         href={`/blog/${slug}`} 
-        className="group grid md:grid-cols-2 gap-6 hover:opacity-90 transition-opacity p-4 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
+        className={`group grid md:grid-cols-2 gap-6 hover:opacity-90 transition-opacity p-4 rounded-lg ${
+          isHighlighted 
+            ? 'border border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20 shadow-md' 
+            : 'border border-transparent hover:border-gray-200 dark:hover:border-gray-700'
+        }`}
       >
         <div className="relative w-full aspect-[16/9] md:aspect-square overflow-hidden rounded-lg">
           {mainImage ? (
@@ -97,7 +104,11 @@ export default function BlogCard({ post, variant = 'medium' }: BlogCardProps) {
   return (
     <Link 
       href={`/blog/${slug}`} 
-      className="group flex flex-col h-full hover:opacity-90 transition-opacity p-3 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
+      className={`group flex flex-col h-full hover:opacity-90 transition-opacity p-3 rounded-lg ${
+        isHighlighted 
+          ? 'border border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20 shadow-md' 
+          : 'border border-transparent hover:border-gray-200 dark:hover:border-gray-700'
+      }`}
     >
       <div className="relative w-full aspect-[16/9] mb-4 overflow-hidden rounded-lg">
         {mainImage ? (
