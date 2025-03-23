@@ -71,15 +71,42 @@ export const SkeletonOne = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [pausePosition, setPausePosition] = useState(0);
 
-  const announcements = [
-    "International Electron Devices Meeting (IEDM) 2024: The 70th annual IEEE IEDM was held from December 7–11, 2024, featuring keynote talks on semiconductor industry outlooks, advancements in AI with energy-efficient architectures, and innovations in power electronics with silicon carbide.",
-    "Launch of the International Roadmap for Devices and Systems (IRDS): In May 2016, IEEE launched the IRDS to provide guidance on future trends in computer systems, architectures, software, chips, and other components across the entire computer industry, expanding beyond traditional Moore's Law scaling.",
-    "IEEE Rebooting Computing Initiative: Established in late 2012, this initiative aims to 'reboot' the entire field of computer technology, addressing challenges and fostering novel methodologies to reinvent computing technology, including new materials, devices, architectures, and software.",
-    "IEEE International Conference on Rebooting Computing (ICRC): The inaugural ICRC was held in October 2016, aiming to discover and foster novel methodologies to reinvent computing technology. Subsequent conferences have continued to address emerging technologies and challenges in computing.",
-    "IEEE Industry Summit on the Future of Computing: First held in November 2017, this summit features plenary presentations by industry, government, and academic leaders on new computer technologies expected in the coming decades, including announcements like IBM's quantum computing breakthrough.",
-    "IEEE Quantum Computing Summit: With growing interest in quantum computing, IEEE held its first summit in August 2018, bringing together leaders from industry, academia, and government to establish metrics and benchmarks in this emerging field.",
-    "IEEE Workshop on Cybersecurity and Artificial Intelligence: Initiated in October 2017, this workshop brings together leaders in cybersecurity and AI/machine learning to develop strategies for applying AI/ML to improve cybersecurity globally."
-  ];
+  const [announcements, setAnnouncements] = useState<{ title: string; content: string; date: string }[]>([]);
+  
+  // Fetch announcements from Sanity
+  React.useEffect(() => {
+    async function fetchAnnouncements() {
+      try {
+        // Using the Sanity GROQ query language to get announcements
+        // Sorting by order (asc) and then by date (desc)
+        const query = `*[_type == "announcement"] | order(order asc, date desc) {
+          title,
+          content,
+          date
+        }`;
+        
+        // Replace this with your actual Sanity client fetch
+        const response = await fetch(`/api/sanity/query?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        if (data && Array.isArray(data.data)) {
+          setAnnouncements(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching announcements:", error);
+        // Fallback to hardcoded announcements in case of error
+        setAnnouncements([
+          {
+            title: "Error loading announcements",
+            content: "Please check back later for announcements.",
+            date: new Date().toISOString().split('T')[0]
+          }
+        ]);
+      }
+    }
+    
+    fetchAnnouncements();
+  }, []);
 
   return (
     <div className="relative flex p-4 sm:p-6 mt-6 sm:mt-10 flex-col items-center gap-3 sm:gap-6 h-[50vh] sm:h-3/4 w-[90%] sm:w-full max-w-lg sm:max-w-4xl mx-auto overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-lg sm:rounded-xl shadow-lg sm:shadow-2xl">
@@ -96,7 +123,11 @@ export const SkeletonOne = () => {
         onMouseLeave={() => setIsHovered(false)}
       >
         {announcements.map((announcement, index) => (
-          <p key={index} className="text-xs sm:text-base font-semibold mb-2 sm:mb-4">• {announcement}</p>
+          <div key={index} className="mb-4">
+            <p className="text-xs sm:text-base font-semibold">• {announcement.title}</p>
+            <p className="text-xs sm:text-sm">{announcement.content}</p>
+            <p className="text-xs text-gray-300">{announcement.date}</p>
+          </div>
         ))}
       </motion.div>
     </div>
