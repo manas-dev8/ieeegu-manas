@@ -119,7 +119,7 @@ export default function BlogPostPage({ post, relatedPosts, categories }: BlogPos
         )}
 
         <div className="prose prose-blue prose-lg max-w-none">
-          <PortableText value={post.body} components={portableTextComponents} />
+          <PortableText value={post.content} components={portableTextComponents} />
         </div>
 
         <div className="mt-12">
