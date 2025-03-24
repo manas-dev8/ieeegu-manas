@@ -50,7 +50,10 @@ export async function getPosts(limit?: number, category?: string, author?: strin
     query,
     params,
     {
-      next: { revalidate: REVALIDATE_INTERVAL }
+      next: { 
+        revalidate: REVALIDATE_INTERVAL,
+        tags: ['posts'] 
+      }
     }
   )
 }
@@ -83,7 +86,10 @@ export async function getPost(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: REVALIDATE_INTERVAL }
+      next: { 
+        revalidate: REVALIDATE_INTERVAL,
+        tags: ['post', `post-${slug}`] 
+      }
     }
   )
 }
@@ -98,7 +104,10 @@ export async function getCategories() {
     }`,
     {},
     {
-      next: { revalidate: REVALIDATE_INTERVAL }
+      next: { 
+        revalidate: REVALIDATE_INTERVAL,
+        tags: ['categories']
+      }
     }
   )
 }
@@ -217,25 +226,36 @@ export async function getRelatedPosts(slug: string, limit = 3) {
   )
 }
 
-export async function triggerRevalidation(slug?: string) {
+export async function triggerRevalidation(type?: string, id?: string, path?: string) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
 
   try {
-    await fetch(`${baseUrl}/api/revalidate-blog`, {
+    // Make request to our revalidation API endpoint
+    const response = await fetch(`${baseUrl}/api/revalidate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.REVALIDATION_TOKEN}`
       },
       body: JSON.stringify({
-        secret: process.env.REVALIDATION_TOKEN,
-        slug,
+        type,
+        id,
+        path,
+        tag: type ? `${type}-${id}` : undefined
       }),
-    })
-    return true
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(`Revalidation failed: ${data.message || response.statusText}`);
+    }
+    
+    return { success: true, message: data.message };
   } catch (error) {
-    console.error('Revalidation error:', error)
-    return false
+    console.error('Revalidation error:', error);
+    return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
   }
 }
 

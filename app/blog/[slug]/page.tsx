@@ -25,14 +25,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
+// Add dynamic segment configuration to enable on-demand revalidation
+export const dynamicParams = true;
+
+// Set revalidate interval to 60 seconds (for ISR)
+export const revalidate = 60;
+
+// Generate static params for build time
 export async function generateStaticParams() {
   const posts = await getPosts(100); // limit to 100 for build time
   return posts.map((post: Post) => ({ 
     slug: post.slug,
   }));
 }
-
-export const revalidate = 60;
 
 // Define the components for the PortableText renderer
 const portableTextComponents = {
