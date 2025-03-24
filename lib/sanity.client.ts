@@ -64,11 +64,22 @@ export async function getPost(slug: string) {
       publishedAt,
       excerpt,
       mainImage,
-      body,
+      body, // Ensure body is included to get the full blog content
+      "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180),
       "categories": categories[]->{ _id, title, "slug": slug.current },
-      "authors": authors[]->{ _id, name, "slug": slug.current, image, bio, "organization": organization->{
-        _id, name, "slug": slug.current
-      }, socialLinks }
+      "authors": authors[]->{ 
+        _id, 
+        name, 
+        "slug": slug.current, 
+        image, 
+        bio, 
+        "organization": organization->{
+          _id, 
+          name, 
+          "slug": slug.current
+        }, 
+        socialLinks 
+      }
     }`,
     { slug },
     {
