@@ -64,8 +64,8 @@ export async function getPost(slug: string) {
       publishedAt,
       excerpt,
       mainImage,
-      body, // Ensure body is included to get the full blog content
-      "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180),
+      content, // Changed from 'body' to 'content' to match the Sanity schema
+      "estimatedReadingTime": round(length(pt::text(content)) / 5 / 180), // Also update here
       "categories": categories[]->{ _id, title, "slug": slug.current },
       "authors": authors[]->{ 
         _id, 
@@ -206,6 +206,7 @@ export async function getRelatedPosts(slug: string, limit = 3) {
         publishedAt,
         excerpt,
         mainImage,
+        "estimatedReadingTime": round(length(pt::text(content)) / 5 / 180), // Update here too
         "authors": authors[]->{ _id, name, "slug": slug.current, image }
       }
     }.related`,

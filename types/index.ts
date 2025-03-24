@@ -4,7 +4,7 @@ export interface Post {
   slug: string;
   publishedAt: string;
   excerpt?: string;
-  body: any[];
+  content: any[]; // Changed from body to content to match Sanity schema
   mainImage?: {
     _type: 'image';
     asset: {

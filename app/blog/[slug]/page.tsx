@@ -155,8 +155,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         <div className="prose prose-blue dark:prose-invert prose-lg max-w-none">
-          {/* This renders the full blog content */}
-          {post.body && <PortableText value={post.body} components={portableTextComponents} />}
+          {/* This renders the full blog content - updated from body to content */}
+          {post.content && <PortableText value={post.content} components={portableTextComponents} />}
         </div>
 
         {post.authors && post.authors[0] && (

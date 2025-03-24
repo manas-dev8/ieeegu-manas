@@ -49,9 +49,9 @@ export class BlogService {
     // Ensure post has all needed properties to prevent errors
     post.authors = post.authors || [];
     
-    // Debug the post content to ensure body is present
-    if (process.env.NODE_ENV !== 'production' && !post.body) {
-      console.warn(`Blog post ${slug} is missing body content`);
+    // Debug the post content to ensure content is present
+    if (process.env.NODE_ENV !== 'production' && !post.content) {
+      console.warn(`Blog post ${slug} is missing content`);
     }
     
     return {
