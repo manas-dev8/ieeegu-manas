@@ -74,7 +74,7 @@ export default function Footer() {
               Connect With Us
             </h3>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+              <a href="https://x.com/ieeegusb" className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
                 <span className="sr-only">Twitter</span>
                 <Twitter className="h-6 w-6" />
               </a>
