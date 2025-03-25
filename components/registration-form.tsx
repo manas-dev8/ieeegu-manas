@@ -9,18 +9,23 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { PlusCircle, Trash2, Info, Users, Calendar, BadgeIndianRupee, CheckCircle2 } from "lucide-react"
+import { PlusCircle, Trash2, Info, Users, Calendar, BadgeIndianRupee, CheckCircle2, CreditCard } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { motion } from "framer-motion"
+import { useRazorpay } from "@/hooks/useRazorpay"
+import { EventDetails } from "@/types/payment"
 
 // Event data definition
 const eventData = [
   {
     id: "codeastra",
     name: "CODEASTRA",
+    date: "05-04-2025",
+    venue: "AI/DS 1ST FLOOR FULL LENGTH",
+    organizer: "GALGOTIAS TECH COUNCIL",
     pricePerPerson: 100,
     minTeamSize: 2,
     maxTeamSize: 4,
@@ -29,6 +34,9 @@ const eventData = [
   {
     id: "imagix",
     name: "IMAGIX",
+    date: "02-04-2025",
+    venue: "AI/DS LIBRARY LG",
+    organizer: "COMPUTER SOCIETY",
     pricePerPerson: 0,
     fixedPrice: 150,
     minTeamSize: 1,
@@ -110,10 +118,19 @@ const formSchema = z.object({
 
 export default function RegistrationForm() {
   const [selectedEvent, setSelectedEvent] = useState<string>("")
-  const [eventDetails, setEventDetails] = useState<any>(null)
+  const [eventDetails, setEventDetails] = useState<EventDetails | null>(null)
   const [teamSize, setTeamSize] = useState(1)
   const [totalAmount, setTotalAmount] = useState(0)
   const { toast } = useToast()
+  const { createPayment, isLoading, error } = useRazorpay({
+    onError: (err) => {
+      toast({
+        title: "Payment Failed",
+        description: err.message || "There was an issue processing your payment.",
+        variant: "destructive",
+      })
+    }
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -133,7 +150,7 @@ export default function RegistrationForm() {
   // Update event details when a new event is selected
   useEffect(() => {
     if (selectedEvent) {
-      const event = eventData.find(e => e.id === selectedEvent)
+      const event = eventData.find(e => e.id === selectedEvent) as EventDetails
       setEventDetails(event)
       resetTeamMembers(event)
     } else {
@@ -158,14 +175,14 @@ export default function RegistrationForm() {
       setTeamSize(currentTeamSize)
       
       if (eventDetails.isFixedPrice) {
-        setTotalAmount(eventDetails.fixedPrice)
+        setTotalAmount(eventDetails.fixedPrice || 0)
       } else {
         setTotalAmount(eventDetails.pricePerPerson * currentTeamSize)
       }
     }
   }, [watchedTeamMembers, eventDetails])
 
-  function resetTeamMembers(event: any) {
+  function resetTeamMembers(event: EventDetails) {
     if (event.minTeamSize > 1) {
       // Initialize with minimum required team members
       const initialTeamMembers = Array(event.minTeamSize - 1).fill(0).map(() => ({name: ""}))
@@ -197,13 +214,20 @@ export default function RegistrationForm() {
     )
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    toast({
-      title: "Registration Successful",
-      description: "Your registration has been submitted successfully.",
-      duration: 5000,
-    })
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!eventDetails) return;
+
+    try {
+      // Initiate payment
+      await createPayment(values, eventDetails);
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem processing your payment. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -319,10 +343,10 @@ export default function RegistrationForm() {
                           <SelectValue placeholder="Select an event" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-white  dark:text-slate-900 border-slate-200">
+                      <SelectContent className="bg-white dark:text-slate-900 border-slate-200">
                         {eventData.map((event) => (
                           <SelectItem key={event.id} value={event.id} className="focus:bg-slate-100 dark:text-slate-900 focus:text-slate-900">
-                            {event.name}
+                            {event.name} ({event.date})
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -336,7 +360,20 @@ export default function RegistrationForm() {
                 <div className="mt-6 p-5 bg-slate-50 rounded-lg space-y-3 border border-slate-100">
                   <div className="flex items-center gap-2 text-slate-700">
                     <Calendar className="h-4 w-4 text-slate-500" />
-                    <span className="text-sm font-medium">{eventDetails.name}</span>
+                    <span className="text-sm font-medium">{eventDetails.name} - {eventDetails.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <svg className="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span className="text-sm font-medium">{eventDetails.organizer}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <svg className="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="text-sm">{eventDetails.venue}</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-600">
                     <Users className="h-4 w-4 text-slate-500" />
@@ -458,7 +495,7 @@ export default function RegistrationForm() {
         >
           <Card className="border-slate-100 shadow-sm bg-white">
             <CardHeader className="border-b border-slate-100 bg-slate-50/50">
-              <CardTitle className="text-2xl text-slate-800">Registration Summary</CardTitle>
+              <CardTitle className="text-2xl text-slate-800">Payment Summary</CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-4">
@@ -482,15 +519,14 @@ export default function RegistrationForm() {
                       <div className="flex items-start gap-2">
                         <Info className="h-4 w-4 mt-1 flex-shrink-0 text-blue-500" />
                         <p className="text-sm text-blue-700">
-                          Payment can be made at the registration desk on the event day.
-                          Please keep this total amount ready.
+                          Secure payment powered by Razorpay. You'll be redirected to the payment gateway after submitting this form.
                         </p>
                       </div>
                     </div>
                   </>
                 ) : (
                   <div className="text-center p-8 text-slate-500 border border-dashed border-slate-200 rounded-lg">
-                    Select an event to see the registration summary
+                    Select an event to see the payment summary
                   </div>
                 )}
               </div>
@@ -507,13 +543,31 @@ export default function RegistrationForm() {
           <Button 
             type="submit" 
             size="lg" 
-            disabled={!selectedEvent}
+            disabled={!selectedEvent || isLoading}
             className="px-8 py-6 bg-slate-800 hover:bg-slate-700 text-white transition-colors"
           >
-            <CheckCircle2 className="mr-2 h-5 w-5" />
-            Complete Registration
+            {isLoading ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Processing...
+              </span>
+            ) : (
+              <>
+                <CreditCard className="mr-2 h-5 w-5" />
+                Proceed to Payment
+              </>
+            )}
           </Button>
         </motion.div>
+
+        {error && (
+          <div className="text-red-500 text-center mt-4">
+            {error}
+          </div>
+        )}
       </form>
     </Form>
   )
