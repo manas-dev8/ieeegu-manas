@@ -17,92 +17,9 @@ import { useToast } from "@/components/ui/use-toast"
 import { motion } from "framer-motion"
 import { useRazorpay } from "@/hooks/useRazorpay"
 import { EventDetails } from "@/types/payment"
+import { eventData } from "@/data/events"
 
 // Event data definition
-const eventData = [
-  {
-    id: "codeastra",
-    name: "CODEASTRA",
-    date: "05-04-2025",
-    venue: "AI/DS 1ST FLOOR FULL LENGTH",
-    organizer: "GALGOTIAS TECH COUNCIL",
-    pricePerPerson: 100,
-    minTeamSize: 2,
-    maxTeamSize: 4,
-    isFixedPrice: false,
-  },
-  {
-    id: "imagix",
-    name: "IMAGIX",
-    date: "02-04-2025",
-    venue: "AI/DS LIBRARY LG",
-    organizer: "COMPUTER SOCIETY",
-    pricePerPerson: 0,
-    fixedPrice: 150,
-    minTeamSize: 1,
-    maxTeamSize: 3,
-    isFixedPrice: true,
-  },
-  {
-    id: "techTriviaBlitz",
-    name: "TECH TRIVIA BLITZ",
-    pricePerPerson: 70,
-    minTeamSize: 1,
-    maxTeamSize: 1,
-    isFixedPrice: false,
-  },
-  {
-    id: "decodeTheCode",
-    name: "DECODE THE CODE",
-    pricePerPerson: 60,
-    minTeamSize: 1,
-    maxTeamSize: 1,
-    isFixedPrice: false,
-  },
-  {
-    id: "followTheLine",
-    name: "FOLLOW THE LINE",
-    pricePerPerson: 100,
-    minTeamSize: 1,
-    maxTeamSize: 4,
-    isFixedPrice: false,
-  },
-  {
-    id: "designCanvas",
-    name: "DESIGN CANVAS",
-    pricePerPerson: 50,
-    minTeamSize: 2,
-    maxTeamSize: 4,
-    isFixedPrice: false,
-  },
-  {
-    id: "photoWalk",
-    name: "PHOTOWALK",
-    pricePerPerson: 50,
-    minTeamSize: 1,
-    maxTeamSize: 1,
-    isFixedPrice: false,
-  },
-  {
-    id: "codeBlind",
-    name: "CODEBLINDS",
-    pricePerPerson: 60,
-    minTeamSize: 1,
-    maxTeamSize: 1,
-    isFixedPrice: false,
-  },
-  {
-    id: "pitchMe",
-    name: "PITCH ME 3.0 TECH REVIVAL EDITION",
-    pricePerPerson: 0,
-    fixedPrice: 150,
-    minTeamSize: 1,
-    maxTeamSize: 2,
-    isFixedPrice: true,
-  },
-]
-
-
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   affiliation: z.string().min(2, { message: "Affiliation must be at least 2 characters." }),
@@ -150,9 +67,11 @@ export default function RegistrationForm() {
   // Update event details when a new event is selected
   useEffect(() => {
     if (selectedEvent) {
-      const event = eventData.find(e => e.id === selectedEvent) as EventDetails
-      setEventDetails(event)
-      resetTeamMembers(event)
+      const event = eventData.find(e => e.id === selectedEvent)
+      if (event) {
+        setEventDetails(event)
+        resetTeamMembers(event)
+      }
     } else {
       setEventDetails(null)
     }
@@ -218,13 +137,17 @@ export default function RegistrationForm() {
     if (!eventDetails) return;
 
     try {
+      if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID) {
+        throw new Error("Payment system is not properly configured");
+      }
+      
       // Initiate payment
       await createPayment(values, eventDetails);
     } catch (error) {
       console.error("Payment error:", error);
       toast({
         title: "Error",
-        description: "There was a problem processing your payment. Please try again.",
+        description: error instanceof Error ? error.message : "There was a problem processing your payment. Please try again.",
         variant: "destructive",
       });
     }

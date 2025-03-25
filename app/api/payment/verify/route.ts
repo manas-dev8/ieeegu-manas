@@ -5,6 +5,17 @@ import { saveRegistration } from "@/lib/registration";
 
 export async function POST(request: NextRequest) {
   try {
+    // Verify API keys are available
+    const key_secret = process.env.RAZORPAY_KEY_SECRET;
+    
+    if (!key_secret) {
+      console.error("Razorpay API key secret is missing from environment variables");
+      return NextResponse.json(
+        { success: false, error: "Payment service configuration error" },
+        { status: 500 }
+      );
+    }
+
     const body: PaymentVerificationPayload = await request.json();
     
     const {
@@ -18,7 +29,7 @@ export async function POST(request: NextRequest) {
     // Verify the signature
     const text = razorpay_order_id + "|" + razorpay_payment_id;
     const generated_signature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET as string)
+      .createHmac("sha256", key_secret)
       .update(text)
       .digest("hex");
 

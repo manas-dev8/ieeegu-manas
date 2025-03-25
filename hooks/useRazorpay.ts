@@ -38,6 +38,12 @@ export function useRazorpay(options?: UseRazorpayOptions) {
       setIsLoading(true);
       setError(null);
 
+      // Validate Razorpay key
+      const razorpayKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+      if (!razorpayKeyId) {
+        throw new Error("Payment configuration error");
+      }
+
       // Calculate team size
       const teamSize = 1 + (formData.teamMembers?.length || 0);
       
@@ -59,14 +65,15 @@ export function useRazorpay(options?: UseRazorpayOptions) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create payment order");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create payment order");
       }
 
       const { order } = await response.json();
 
       // Open Razorpay checkout
       const razorpay = new window.Razorpay({
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: razorpayKeyId,
         amount: order.amount, // Amount in paisa
         currency: order.currency,
         name: "IEEE GU Young Minds",

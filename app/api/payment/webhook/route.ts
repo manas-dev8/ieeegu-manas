@@ -4,12 +4,22 @@ import { updatePaymentStatus } from "@/lib/registration";
 
 export async function POST(request: NextRequest) {
   try {
+    const key_secret = process.env.RAZORPAY_KEY_SECRET;
+    
+    if (!key_secret) {
+      console.error("Razorpay API key secret is missing from environment variables");
+      return NextResponse.json(
+        { error: "Payment service configuration error" },
+        { status: 500 }
+      );
+    }
+
     const body = await request.text();
     const signature = request.headers.get("x-razorpay-signature") || "";
 
     // Verify webhook signature
     const expectedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET as string)
+      .createHmac("sha256", key_secret)
       .update(body)
       .digest("hex");
 
