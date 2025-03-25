@@ -30,7 +30,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "IEEE GU Chapter",
-  description: "IEEE Goa University Student Chapter",
+  description: "IEEE Galgotias University Student Chapter",
 };
 
 export default function RootLayout({
