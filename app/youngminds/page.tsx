@@ -14,8 +14,9 @@ export default function YoungMinds() {
         {
             id: "imagix",
             name: "IMAGIX",
-            date: "4/2/2025",
-            venue: "AI/DS Library ground",
+            date: "02-04-2025",
+            venue: "AI/DS LIBRARY LG",
+            organizer: "COMPUTER SOCIETY",
             pricePerPerson: 0,
             fixedPrice: 150,
             minTeamSize: 1,
@@ -23,21 +24,34 @@ export default function YoungMinds() {
             isFixedPrice: true
         },
         {
-            id: "codeBlind",
-            name: "CODEBLINDS",
-            date: "4/3/2025",
+            id: "techTriviaBlitz",
+            name: "TECH TRIVIA BLITZ",
+            date: "03-04-2025",
             venue: "AI/DS 307",
+            organizer: "WOMEN IN ENGINEERING",
+            pricePerPerson: 70,
+            minTeamSize: 1,
+            maxTeamSize: 1,
+            isFixedPrice: false
+        },
+        {
+            id: "decodeTheCode",
+            name: "DECODE THE CODE",
+            date: "03-04-2025",
+            venue: "AI/DS 307",
+            organizer: "WOMEN IN ENGINEERING",
             pricePerPerson: 60,
             minTeamSize: 1,
             maxTeamSize: 1,
             isFixedPrice: false
         },
         {
-            id: "photoWalk",
-            name: "PHOTOWALK",
-            date: "4/3/2025",
+            id: "codeBlind",
+            name: "CODEBLINDS",
+            date: "03-04-2025",
             venue: "AI/DS 307",
-            pricePerPerson: 50,
+            organizer: "TECHNOJAM",
+            pricePerPerson: 60,
             minTeamSize: 1,
             maxTeamSize: 1,
             isFixedPrice: false
@@ -45,8 +59,9 @@ export default function YoungMinds() {
         {
             id: "followTheLine",
             name: "FOLLOW THE LINE",
-            date: "4/4/2025",
-            venue: "C block ground",
+            date: "04-04-2025",
+            venue: "C BLOCK",
+            organizer: "INDUSTRY APPLICATIONS SOCIETY",
             pricePerPerson: 100,
             minTeamSize: 1,
             maxTeamSize: 4,
@@ -55,48 +70,64 @@ export default function YoungMinds() {
         {
             id: "designCanvas",
             name: "DESIGN CANVAS",
-            date: "4/4/2025",
-            venue: "C block ground",
+            date: "04-04-2025",
+            venue: "GROUND",
+            organizer: "INDUSTRY APPLICATIONS SOCIETY",
             pricePerPerson: 50,
             minTeamSize: 2,
             maxTeamSize: 4,
             isFixedPrice: false
         },
         {
-            id: "photoWalk2",
-            name: "PHOTOWALK",
-            date: "4/4/2025",
-            venue: "C block ground",
-            pricePerPerson: 50,
-            minTeamSize: 1,
-            maxTeamSize: 1,
-            isFixedPrice: false
-        },
-        {
             id: "codeastra",
-            name: "CODEASTRA",
-            date: "4/5/2025",
-            venue: "AI/DS 1st/goundFloor full length",
+            name: "CODE ASTRA",
+            date: "05-04-2025",
+            venue: "AI/DS 1ST FLOOR FULL LENGTH",
+            organizer: "GALGOTIAS TECH COUNCIL",
             pricePerPerson: 100,
             minTeamSize: 2,
             maxTeamSize: 4,
             isFixedPrice: false
         },
         {
-            id: "photoWalk3",
-            name: "PHOTOWALK",
-            date: "4/5/2025",
-            venue: "AI/DS 1st/goundFloor full length",
+            id: "culturalEvents",
+            name: "CULTURAL EVENTS",
+            date: "05-04-2025",
+            venue: "NEW AUDI",
+            organizer: "GALGOTIAS UNIVERSITY STUDENT COUNCIL",
             pricePerPerson: 50,
             minTeamSize: 1,
             maxTeamSize: 1,
             isFixedPrice: false
         },
         {
+            id: "photoWalk",
+            name: "PHOTOWALK",
+            date: "05-04-2025",
+            venue: "UNIVERSITY CAMPUS",
+            organizer: "VGTC GU",
+            pricePerPerson: 50,
+            minTeamSize: 1,
+            maxTeamSize: 1,
+            isFixedPrice: false
+        },
+        {
+            id: "codeastra2",
+            name: "CODE ASTRA",
+            date: "06-04-2025",
+            venue: "AI/DS 1ST FLOOR FULL LENGTH",
+            organizer: "GALGOTIAS TECH COUNCIL",
+            pricePerPerson: 100,
+            minTeamSize: 2,
+            maxTeamSize: 4,
+            isFixedPrice: false
+        },
+        {
             id: "pitchMe",
-            name: "PITCH ME 3.0 TECH REVIVAL EDITION",
-            date: "4/6/2025",
-            venue: "AI/DS 1st/goundFloor full length",
+            name: "PITCH ME 3.0",
+            date: "06-04-2025",
+            venue: "AI/DS 307",
+            organizer: "E CELL",
             pricePerPerson: 0,
             fixedPrice: 150,
             minTeamSize: 1,
@@ -104,10 +135,11 @@ export default function YoungMinds() {
             isFixedPrice: true
         },
         {
-            id: "photoWalk4",
+            id: "photoWalk2",
             name: "PHOTOWALK",
-            date: "4/6/2025",
-            venue: "AI/DS 1st/goundFloor full length",
+            date: "06-04-2025",
+            venue: "UNIVERSITY CAMPUS",
+            organizer: "VGTC GU",
             pricePerPerson: 50,
             minTeamSize: 1,
             maxTeamSize: 1,
@@ -169,7 +201,7 @@ export default function YoungMinds() {
                             Learn More
                         </button>
                     </div>
-                    <p className="mt-8 text-blue-100">July 10-15, 2023 • IEEE GU Campus • Galgotias University</p>
+                    <p className="mt-8 text-blue-100">April 2-6, 2025 • IEEE GU Campus • Galgotias University</p>
                 </div>
             </section>
 
@@ -179,14 +211,14 @@ export default function YoungMinds() {
                     <h2 className="text-3xl dark:text-black font-bold mb-8 text-center">About The Event</h2>
                     <div className="bg-white rounded-xl shadow-lg p-8">
                         <p className="text-lg text-gray-700 leading-relaxed">
-                            Young Minds is a 6-day immersive technology event designed to inspire and educate students
+                            Young Minds is a 5-day immersive technology event designed to inspire and educate students
                             about the latest advancements in technology. From coding and artificial intelligence to design
                             thinking and innovation, participants will have the opportunity to learn from industry experts,
                             collaborate with peers, and develop projects that address real-world challenges.
                         </p>
                         <div className="mt-8 flex justify-center gap-8 flex-wrap">
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600">6</div>
+                                <div className="text-4xl font-bold text-blue-600">5</div>
                                 <div className="text-gray-600">Days</div>
                             </div>
                             <div className="text-center">
@@ -211,7 +243,7 @@ export default function YoungMinds() {
                 <div className="container mx-auto max-w-6xl">
                     <h2 className="text-3xl font-bold mb-2 dark:text-black text-center">Tech Competitions</h2>
                     <p className="text-center text-gray-600 mb-8">Exciting challenges to showcase your skills and creativity</p>
-                    <p className="text-center text-gray-600 mb-8">Attention: Dates are in MM/DD/YY format</p>
+                    <p className="text-center text-gray-600 mb-8">Attention: Dates are in DD-MM-YY format</p>
                     
                     {/* Program by Day */}
                     {Object.keys(eventsByDate).sort().map(date => (
@@ -234,6 +266,9 @@ export default function YoungMinds() {
                                             </div>
                                         </div>
                                         <div className="p-4">
+                                            <div className="mb-2">
+                                                <p className="text-sm font-medium text-blue-600">{event.organizer}</p>
+                                            </div>
                                             <div className="flex items-center mb-2">
                                                 <svg className="h-4 w-4 text-gray-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
