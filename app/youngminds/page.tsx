@@ -211,6 +211,7 @@ export default function YoungMinds() {
                 <div className="container mx-auto max-w-6xl">
                     <h2 className="text-3xl font-bold mb-2 dark:text-black text-center">Tech Competitions</h2>
                     <p className="text-center text-gray-600 mb-8">Exciting challenges to showcase your skills and creativity</p>
+                    <p className="text-center text-gray-600 mb-8">Attention: Dates are in MM/DD/YY format</p>
                     
                     {/* Program by Day */}
                     {Object.keys(eventsByDate).sort().map(date => (
@@ -250,9 +251,12 @@ export default function YoungMinds() {
                                                            : `${event.minTeamSize}-${event.maxTeamSize} participants`}
                                                 </p>
                                             </div>
+                                            
+                                            <Link href="/regym">
                                             <button className="mt-4 w-full bg-blue-50 text-blue-600 font-medium py-2 rounded hover:bg-blue-100 transition">
                                                 Register
                                             </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 ))}
