@@ -1,8 +1,10 @@
-import "./globals.css";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import {
   Calendar,
   Users,
@@ -26,18 +28,20 @@ import ScrollingBanner from "@/components/scrolling-banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "IEEE Student Branch, Galgotias University",
-  description:
-    "Official website of the IEEE Student Branch at Galgotias University",
+export const metadata: Metadata = {
+  title: "IEEE GU Chapter",
+  description: "IEEE Goa University Student Chapter",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
-      <body className={`${inter.className} bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ContextMenu>
             <ContextMenuTrigger>
               <Navbar />
@@ -52,11 +56,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   Societies
                 </ContextMenuSubTrigger>
                 <ContextMenuSubContent className="w-48 bg-gradient-to-br from-[#f0f8ff] to-[#e6f3ff] text-[#005580] rounded-md shadow-lg">
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Women in Engineering</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Industry Applications Society</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Computer Society</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Computational Intelligence Society</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Education Society</ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Women in Engineering
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Industry Applications Society
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Computer Society
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Computational Intelligence Society
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Education Society
+                  </ContextMenuItem>
                 </ContextMenuSubContent>
               </ContextMenuSub>
               <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors flex items-center">
@@ -74,10 +88,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   Research Areas
                 </ContextMenuSubTrigger>
                 <ContextMenuSubContent className="w-48 bg-gradient-to-br from-[#f0f8ff] to-[#e6f3ff] text-[#005580] rounded-md shadow-lg">
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Artificial Intelligence</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Quantum Computing</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Cybersecurity</ContextMenuItem>
-                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">Robotics</ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Artificial Intelligence
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Quantum Computing
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Cybersecurity
+                  </ContextMenuItem>
+                  <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors">
+                    Robotics
+                  </ContextMenuItem>
                 </ContextMenuSubContent>
               </ContextMenuSub>
               <ContextMenuItem className="hover:bg-[#d9ecff] transition-colors flex items-center">
@@ -99,6 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </ContextMenuItem>
             </ContextMenuContent>
           </ContextMenu>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
