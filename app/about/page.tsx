@@ -1,93 +1,136 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Users, Zap, ExternalLink } from 'lucide-react'
-import Link from 'next/link'
+import { PolicyLayout } from '@/components/policy-layout';
+import Image from 'next/image';
 
-export default function AboutIEEE() {
+export const metadata = {
+  title: 'About Us | IEEE GU',
+  description: 'Learn about IEEE Galgotias University and our mission to promote technology education and innovation.',
+};
+
+export default function AboutPage() {
   return (
-    <section className="py-16 bg-white text-black dark:bg-gray-900 dark:text-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 animate-fade-in-up">
-          About IEEE at Galgotias University
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="space-y-6 animate-fade-in-left">
-            <p className="text-lg">
-              IEEE (Institute of Electrical and Electronics Engineers) is the world&apos;s largest technical professional organization dedicated to advancing technology for the benefit of humanity.
-            </p>
-            <p className="text-lg">
-              At Galgotias University, the IEEE Student Branch provides a platform for students to enhance their technical skills, network with professionals, and contribute to technological advancements.
-            </p>
-            <h3 className="text-xl font-semibold">Our Mission</h3>
-            <p className="text-lg">
-              To foster technological innovation and excellence for the benefit of humanity, while promoting the professional development of our student members.
-            </p>
-            <h3 className="text-xl font-semibold">What We Offer</h3>
-            <ul className="list-disc list-inside text-lg space-y-2">
-              <li>Technical workshops and seminars</li>
-              <li>Industry expert talks and panel discussions</li>
-              <li>Project development opportunities</li>
-              <li>Networking events with professionals</li>
-              <li>Access to IEEE&apos;s vast digital library</li>
-            </ul>
-            <div className="flex space-x-4 mt-6">
-              <Button className="transition-all duration-300 hover:scale-105 bg-white text-black dark:bg-gray-800 dark:text-white">
-                Join IEEE Galgotias
-              </Button>
-              <Link href="https://tr.ee/VZE64pxyk4">
-                <Button variant="outline" className="flex items-center transition-all duration-300 hover:scale-105 dark:border-gray-600 dark:text-white">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Visit Our Linktree
-                </Button>
-              </Link>
+    <PolicyLayout title="About IEEE Galgotias University">
+      <div className="space-y-8">
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Our Mission</h2>
+          <p className="text-gray-700">
+            IEEE Galgotias University Student Branch is dedicated to fostering technological innovation and excellence for the benefit of humanity. We aim to inspire students to pursue excellence in their chosen fields and contribute meaningfully to technological advancement through education, collaboration, and practical application of knowledge.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Who We Are</h2>
+          <p className="text-gray-700 mb-4">
+            Founded in 2015, IEEE Galgotias University is a student branch of the world's largest technical professional organization, the Institute of Electrical and Electronics Engineers (IEEE). Our branch operates under the Delhi Section of IEEE Region 10 and serves students across various disciplines of engineering and technology at Galgotias University.
+          </p>
+          <p className="text-gray-700">
+            Led by passionate student volunteers and guided by faculty advisors, our branch offers a platform for students to develop technical skills, leadership abilities, and professional networks beyond the classroom.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">What We Do</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold mb-2 text-blue-700">Technical Events</h3>
+              <p className="text-gray-700">
+                We organize workshops, seminars, coding competitions, hackathons, and technical symposiums like Young Minds that bring together students, academics, and industry professionals to share knowledge and inspire innovation.
+              </p>
+            </div>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold mb-2 text-blue-700">Skill Development</h3>
+              <p className="text-gray-700">
+                Through hands-on sessions and projects, we help students develop practical skills that complement their academic learning and prepare them for professional challenges.
+              </p>
+            </div>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold mb-2 text-blue-700">Networking</h3>
+              <p className="text-gray-700">
+                We connect students with professionals and experts through guest lectures, industry visits, and networking sessions, creating valuable opportunities for mentorship and career guidance.
+              </p>
+            </div>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold mb-2 text-blue-700">Research & Publication</h3>
+              <p className="text-gray-700">
+                We encourage and support students in research activities and help them publish their work through IEEE-affiliated journals and conferences.
+              </p>
             </div>
           </div>
-          <div className="space-y-6 animate-fade-in-right">
-            <div className="grid gap-4">
-              <Card className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 dark:bg-gray-800 dark:text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <BookOpen className="mr-2" />
-                    Learning Opportunities
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>
-                    Access to workshops, seminars, and technical talks by industry experts.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-              <Card className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 dark:bg-gray-800 dark:text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Users className="mr-2" />
-                    Networking
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>
-                    Connect with peers, professors, and professionals in the field of technology.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-              <Card className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 dark:bg-gray-800 dark:text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Zap className="mr-2" />
-                    Innovation
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>
-                    Participate in projects and competitions to showcase your technical skills.
-                  </CardDescription>
-                </CardContent>
-              </Card>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Our Society Chapters</h2>
+          <p className="text-gray-700 mb-4">
+            IEEE GU hosts several specialized society chapters that focus on specific fields within technology:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li><strong>Computer Society:</strong> Focusing on advanced computing, software engineering, and information technology.</li>
+            <li><strong>Women in Engineering (WIE):</strong> Supporting the recruitment and retention of women in technical disciplines.</li>
+            <li><strong>Industry Applications Society:</strong> Bridging the gap between theoretical knowledge and industrial applications.</li>
+            <li><strong>Power & Energy Society:</strong> Concentrating on electrical power and energy engineering challenges.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Leadership Team</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <span className="text-gray-500">Photo</span>
+              </div>
+              <h3 className="font-bold">Prof. Anil Kumar</h3>
+              <p className="text-blue-600">Branch Counselor</p>
+            </div>
+            <div className="text-center">
+              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <span className="text-gray-500">Photo</span>
+              </div>
+              <h3 className="font-bold">Rishi Sharma</h3>
+              <p className="text-blue-600">Chairperson</p>
+            </div>
+            <div className="text-center">
+              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <span className="text-gray-500">Photo</span>
+              </div>
+              <h3 className="font-bold">Priya Mishra</h3>
+              <p className="text-blue-600">Vice-Chairperson</p>
             </div>
           </div>
-        </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Our Achievements</h2>
+          <p className="text-gray-700 mb-4">
+            IEEE Galgotias University has established itself as one of the most active student branches in the Delhi Section:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Exemplary Student Branch Award, IEEE Delhi Section, 2023</li>
+            <li>Best Student Branch Website, IEEE Region 10, 2022</li>
+            <li>Outstanding WIE Student Branch Affinity Group, 2021</li>
+            <li>Successfully organized 50+ technical events with 5000+ participants over the last three years</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Join Us</h2>
+          <p className="text-gray-700 mb-4">
+            IEEE membership offers unmatched opportunities for students to grow personally and professionally. Join our branch to:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Connect with like-minded peers and industry professionals</li>
+            <li>Access exclusive technical resources and IEEE's vast digital library</li>
+            <li>Participate in competitions and events at local, national, and international levels</li>
+            <li>Develop leadership and organizational skills by volunteering for branch activities</li>
+            <li>Enhance your resume with IEEE membership and participation certificates</li>
+          </ul>
+        </section>
+
+        <section className="border-t border-gray-200 pt-6">
+          <h2 className="text-2xl font-bold mb-4 text-blue-800">Contact Us</h2>
+          <p className="text-gray-700">
+            For inquiries about IEEE Galgotias University, membership, or our events, please email us at ieeegu@galgotiasuniversity.edu.in or visit our office at Room 305, Block C, Galgotias University, Greater Noida, Uttar Pradesh.
+          </p>
+        </section>
       </div>
-    </section>
-  )
+    </PolicyLayout>
+  );
 }

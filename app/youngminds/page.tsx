@@ -418,10 +418,26 @@ export default function YoungMinds() {
                             <p className="text-gray-400">ieeegu@galgotiasuniversity.edu.in</p>
                             <p className="text-gray-400">+91 98765 43210</p>
                         </div>
-                       
+                        <div className="w-full md:w-1/3 mb-6">
+                            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+                            <ul className="space-y-2">
+                                <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
+                                <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+                                <li><Link href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</Link></li>
+                                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                                <li><Link href="/refund-policy" className="text-gray-400 hover:text-white transition-colors">Refund Policy</Link></li>
+                            </ul>
+                        </div>
                     </div>
                     <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
                         <p>© 2025 ICCSAI Young Minds | IEEE Galgotias University. All rights reserved.</p>
+                        <div className="flex flex-wrap justify-center gap-4 mt-4">
+                            <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
+                            <Link href="/privacy-policy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
+                            <Link href="/refund-policy" className="text-gray-400 hover:text-white text-sm">Refunds</Link>
+                            <Link href="/about" className="text-gray-400 hover:text-white text-sm">About</Link>
+                            <Link href="/contact" className="text-gray-400 hover:text-white text-sm">Contact</Link>
+                        </div>
                     </div>
                 </div>
             </footer>

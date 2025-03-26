@@ -65,6 +65,30 @@ export default function Footer() {
               >
                 Team
               </Link>
+              <Link
+                href="/terms"
+                className="text-base text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                href="/refund-policy"
+                className="text-base text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
+              >
+                Refund Policy
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className="text-base text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/contact"
+                className="text-base text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
+              >
+                Contact Us
+              </Link>
             </div>
           </div>
 

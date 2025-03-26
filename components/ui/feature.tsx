@@ -74,39 +74,39 @@ export const SkeletonOne = () => {
   const [announcements, setAnnouncements] = useState<{ title: string; content: string; date: string }[]>([]);
   
   // Fetch announcements from Sanity
-  React.useEffect(() => {
-    async function fetchAnnouncements() {
-      try {
-        // Using the Sanity GROQ query language to get announcements
-        // Sorting by order (asc) and then by date (desc)
-        const query = `*[_type == "announcement"] | order(order asc, date desc) {
-          title,
-          content,
-          date
-        }`;
-        
-        // Replace this with your actual Sanity client fetch
-        const response = await fetch(`/api/sanity/query?query=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        
-        if (data && Array.isArray(data.data)) {
-          setAnnouncements(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching announcements:", error);
-        // Fallback to hardcoded announcements in case of error
-        setAnnouncements([
-          {
-            title: "Error loading announcements",
-            content: "Please check back later for announcements.",
-            date: new Date().toISOString().split('T')[0]
-          }
-        ]);
-      }
+React.useEffect(() => {
+  // Normally this would be fetched from Sanity or an API
+  // For now, using static data
+  const mockAnnouncements = [
+    {
+      title: "Upcoming Workshop",
+      content: "Join us for a hands-on AI workshop this Saturday at 2 PM in Engineering Block A.",
+      date: "August 15, 2023"
+    },
+    {
+      title: "IEEE Membership Drive",
+      content: "Special discount on IEEE membership for freshers. Register now!",
+      date: "August 20, 2023"
+    },
+    {
+      title: "Technical Paper Competition",
+      content: "Submit your research papers by September 10 for the annual IEEE technical paper competition.",
+      date: "September 1, 2023"
+    },
+    {
+      title: "Industry Talk Series",
+      content: "Mr. Rajesh Kumar from Google will be speaking about career opportunities in AI.",
+      date: "September 15, 2023"
+    },
+    {
+      title: "Hackathon 2023",
+      content: "48-hour coding marathon with exciting prizes. Registration open until September 25.",
+      date: "October 1-2, 2023"
     }
-    
-    fetchAnnouncements();
-  }, []);
+  ];
+  
+  setAnnouncements(mockAnnouncements);
+}, []);
 
   return (
     <div className="relative flex p-4 sm:p-6 mt-6 sm:mt-10 flex-col items-center gap-3 sm:gap-6 h-[50vh] sm:h-3/4 w-[90%] sm:w-full max-w-lg sm:max-w-4xl mx-auto overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-lg sm:rounded-xl shadow-lg sm:shadow-2xl">
