@@ -54,7 +54,7 @@ export default function ConferencesPage() {
                     <CardDescription className="text-gray-600 dark:text-gray-400">
                       Details about the upcoming flagship conference.
                     </CardDescription>
-                    <Link href="/conferences/flagship">
+                    <Link href="https://iccsai.in/">
                       <Button variant="default" className="mt-4">Learn More</Button>
                     </Link>
                   </CardContent>

@@ -6,9 +6,10 @@ import { PortableText } from '@portabletext/react';
 import BlogLayout from '@/components/BlogLayout';
 import AuthorCard from '@/components/AuthorCard';
 import BlogCard from '@/components/BlogCard';
-import { getPost, getPosts, getRelatedPosts, getCategories } from '@/lib/sanity.client';
+import { BlogService } from '@/services/blog.service';
 import { urlFor } from '@/lib/image';
 import { Post } from '@/types';
+import { getPost, getPosts } from '@/lib/sanity.client';
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -24,14 +25,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
+// Add dynamic segment configuration to enable on-demand revalidation
+export const dynamicParams = true;
+
+// Set revalidate interval to 60 seconds (for ISR)
+export const revalidate = 60;
+
+// Generate static params for build time
 export async function generateStaticParams() {
   const posts = await getPosts(100); // limit to 100 for build time
   return posts.map((post: Post) => ({ 
     slug: post.slug,
   }));
 }
-
-export const revalidate = 60;
 
 // Define the components for the PortableText renderer
 const portableTextComponents = {
@@ -102,22 +108,26 @@ const portableTextComponents = {
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const [post, relatedPosts, categories] = await Promise.all([
-    getPost(params.slug),
-    getRelatedPosts(params.slug, 3),
-    getCategories()
-  ]);
+  // Use the service layer to get all blog post data
+  const blogData = await BlogService.getBlogPostData(params.slug);
   
-  if (!post) {
-    return <div>Post not found</div>;
+  if (!blogData) {
+    return (
+      <BlogLayout>
+        <div className="text-center py-16">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Post not found</h2>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            The blog post you're looking for doesn't seem to exist.
+          </p>
+        </div>
+      </BlogLayout>
+    );
   }
 
+  const { post, relatedPosts, categories } = blogData;
   const formattedDate = post.publishedAt 
     ? format(new Date(post.publishedAt), 'MMMM dd, yyyy')
     : '';
-    
-  // Ensure post.authors exists to prevent errors
-  post.authors = post.authors || [];
   
   return (
     <BlogLayout 
@@ -126,7 +136,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       categories={categories}
       showCategories={false}
     >
-      <article className="max-w-3xl mx-auto">
+      <article className="max-w-3xl mx-auto blog-content">
         <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-white">{post.title}</h1>
         
         <div className="flex items-center mb-8">
@@ -150,7 +160,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         <div className="prose prose-blue dark:prose-invert prose-lg max-w-none">
-          <PortableText value={post.body} components={portableTextComponents} />
+          {/* This renders the full blog content - updated from body to content */}
+          {post.content && <PortableText value={post.content} components={portableTextComponents} />}
         </div>
 
         {post.authors && post.authors[0] && (

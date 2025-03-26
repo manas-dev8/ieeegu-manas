@@ -11,7 +11,11 @@ export const metadata: Metadata = {
   description: 'Latest insights, articles, and news from IEEE GU',
 };
 
+// Set revalidate interval (for ISR)
 export const revalidate = 60;
+
+// Enable dynamic rendering for on-demand updates
+export const dynamic = 'force-dynamic';
 
 export default async function BlogPage() {
   // Use service layer to fetch data
