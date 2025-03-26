@@ -102,17 +102,6 @@ export const eventData: EventDetails[] = [
     isFixedPrice: false
   },
   {
-    id: "codeastra2",
-    name: "CODE ASTRA",
-    date: "06-04-2025",
-    venue: "AI/DS 1ST FLOOR FULL LENGTH",
-    organizer: "GALGOTIAS TECH COUNCIL",
-    pricePerPerson: 100,
-    minTeamSize: 2,
-    maxTeamSize: 4,
-    isFixedPrice: false
-  },
-  {
     id: "pitchMe",
     name: "PITCH ME 3.0",
     date: "06-04-2025",
@@ -123,16 +112,6 @@ export const eventData: EventDetails[] = [
     minTeamSize: 1,
     maxTeamSize: 2,
     isFixedPrice: true
-  },
-  {
-    id: "photoWalk2",
-    name: "PHOTOWALK",
-    date: "06-04-2025",
-    venue: "UNIVERSITY CAMPUS",
-    organizer: "VGTC GU",
-    pricePerPerson: 50,
-    minTeamSize: 1,
-    maxTeamSize: 1,
-    isFixedPrice: false
   }
+ 
 ];
