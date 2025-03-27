@@ -38,9 +38,9 @@ const StudentBranchChapters = () => {
               <Image
                 src={chapter.logo}
                 alt="SBC"
-                width={300}
-                height={300}
-                className="w-16 h-16 sm:w-60 sm:h-60 object-contain 
+                width={400}
+                height={400}
+                className="w-20 h-20 sm:w-60 sm:h-60 object-contain 
                 transition duration-300 ease-in-out 
                 dark:drop-shadow-[0_0_15px_rgba(0,255,233,0.6)] 
                 dark:brightness-110"
