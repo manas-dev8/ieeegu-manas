@@ -65,7 +65,7 @@ const events: Event[] = [
   },
   {
     id: "event-6",
-    title: "Desgin The Canvas (Poster Making)",
+    title: "Design The Canvas (Poster Making)",
     date: "April-4, 2025",
     description:
       "SDG Poster Design Competition aims to promote awareness of the United Nations Sustainable Development Goals (SDGs) through creative poster design. Participants will visually represent sustainability, global challenges, and solutions aligned with the SDGs.",
@@ -83,16 +83,16 @@ const events: Event[] = [
       "https://res.cloudinary.com/dgna3swph/image/upload/v1743049816/pitch_me_3.0_gdvtno.jpg",
     registerLink: "https://unstop.com/p/pitch-me-30-tech-revival-edition-iccsai-young-minds-2025-galgotias-university-gu-greater-noida-1446805", // ✅ Unique link
   },
-  // {
-  //   id: "event-8",
-  //   title: "Click Licious",
-  //   date: "April 5 - April 6, 2025",
-  //   description:
-  //     "An advanced AI and machine learning summit with experts from the industry. Topics include deep learning, computer vision, NLP, and more.",
-  //   image:
-  //     "https://res.cloudinary.com/dgna3swph/image/upload/v1743049816/Instagram_post_-_32_ct8vco.jpg",
-  //   registerLink: "https://example.com/register-ai-summit", // ✅ Unique link
-  // },
+  {
+    id: "event-8",
+    title: "Click Licious",
+    date: "April 5 - April 6, 2025",
+    description:
+      "Clicklicious presents ClickQuic, an on-spot photo story competition that challenges participants to craft compelling visual narratives centered on engineering. This solo offline event tests technical photography skills. Editing is allowed, but AI-based enhancements are prohibited.",
+    image:
+      "https://res.cloudinary.com/dgna3swph/image/upload/v1743049816/Instagram_post_-_32_ct8vco.jpg",
+    registerLink: "https://unstop.com/p/clicklicious-iccsai-young-minds-2025-galgotias-university-gu-greater-noida-1447691", // ✅ Unique link
+  },
   
 ];
 
@@ -100,7 +100,7 @@ const EventDetails = () => {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen">
       {/* ✅ Full-width Banner */}
-      <div className="w-full pt-[60px] sm:pt-[50px] relative bg-gray-100 dark:bg-gray-900">
+      <div className="w-full relative bg-gray-100 dark:bg-gray-900">
   {/* Full-width Banner (Hidden on Mobile) */}
   <div className="hidden sm:block relative w-full h-[50vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh]">
     <Image
@@ -112,7 +112,6 @@ const EventDetails = () => {
     />
   </div>
 </div>
-
 
 
       {/* ✅ Heading */}
@@ -137,48 +136,51 @@ const EventCard = ({ event }: { event: Event }) => {
     : event.description.slice(0, 100) + (event.description.length > 100 ? "..." : "");
 
   return (
-    <div className="relative bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-lg overflow-hidden group transition-all w-full max-w-[450px] mx-auto">
-    {/* Event Image */}
-    <div className="relative w-full h-[450px] overflow-hidden">
-      <Image
-        src={event.image}
-        alt={event.title}
-        fill
-        className="object-contain transition-all duration-500 group-hover:opacity-30"
-      />
-      {/* Hidden Details (Show on Hover) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <h3 className="text-xl font-bold text-white">{event.title}</h3>
-        <p className="text-sm text-white mt-2">{event.date}</p>
+    <div className="relative bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-lg overflow-hidden group transition-all w-full max-w-[450px] mx-auto 
+    h-auto md:h-auto p-3 md:p-6">
+      
+      {/* Event Image */}
+      <div className="relative w-full aspect-[4/3] md:h-[450px] overflow-hidden">
+        <Image
+          src={event.image}
+          alt={event.title}
+          fill
+          className="w-full h-full transition-all duration-500 group-hover:opacity-30 
+          object-cover md:object-contain"
+        />
+        {/* Hidden Details (Show on Hover) */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black bg-opacity-50">
+          <h3 className="text-lg font-bold text-white">{event.title}</h3>
+          <p className="text-xs text-white mt-1">{event.date}</p>
+        </div>
+      </div>
+
+      {/* Event Details */}
+      <div className="text-center mt-2 md:mt-4">
+        <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100">{event.title}</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 md:mt-2">
+          {description}{" "}
+          {event.description.length > 100 && (
+            <button
+              onClick={() => setShowFullText(!showFullText)}
+              className="text-blue-600 dark:text-blue-400 font-semibold"
+            >
+              {showFullText ? "Show Less" : "Read More"}
+            </button>
+          )}
+        </p>
+
+        {/* Register Button */}
+        <a
+          href={event.registerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 md:mt-5 inline-block w-full px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
+        >
+          Register Now
+        </a>
       </div>
     </div>
-
-    {/* Event Details */}
-    <div className="p-6 text-center">
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{event.title}</h3>
-      <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
-        {description}{" "}
-        {event.description.length > 100 && (
-          <button
-            onClick={() => setShowFullText(!showFullText)}
-            className="text-blue-600 dark:text-blue-400 font-semibold"
-          >
-            {showFullText ? "Show Less" : "Read More"}
-          </button>
-        )}
-      </p>
-
-      {/* Register Button */}
-      <a
-        href={event.registerLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-5 inline-block w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
-      >
-        Register Now
-      </a>
-    </div>
-  </div>
   );
 };
 
