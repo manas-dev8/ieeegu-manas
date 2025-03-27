@@ -100,15 +100,20 @@ const EventDetails = () => {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen">
       {/* ✅ Full-width Banner */}
-      <div className="w-full h-[400px] relative overflow-hidden">
-        <Image
-          src="https://res.cloudinary.com/dgna3swph/image/upload/v1743042740/Instagram_post_-_34_d5vuva.png"
-          alt="Event Banner"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+      <div className="w-full pt-[60px] sm:pt-[50px] relative bg-gray-100 dark:bg-gray-900">
+  {/* Full-width Banner (Hidden on Mobile) */}
+  <div className="hidden sm:block relative w-full h-[50vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh]">
+    <Image
+      src="https://res.cloudinary.com/dgna3swph/image/upload/v1743042740/Instagram_post_-_34_d5vuva.png"
+      alt="Event Banner"
+      layout="fill"
+      objectFit="contain"
+      priority
+    />
+  </div>
+</div>
+
+
 
       {/* ✅ Heading */}
       <h2 className="text-5xl md:text-7xl font-bold text-center text-gray-900 dark:text-gray-100 mt-10">

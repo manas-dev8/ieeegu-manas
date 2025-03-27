@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { AuroraBackgroundDemo } from "@/components/aurorabg";
+// import { AuroraBackgroundDemo } from "@/components/aurorabg";
 
 const chapters = [
   {
@@ -20,9 +20,9 @@ const StudentBranchChapters = () => {
   return (
     <div className="relative flex items-center justify-center w-full">
       {/* Aurora Background */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         <AuroraBackgroundDemo />
-      </div>
+      </div> */}
 
       {/* Content Wrapper */}
       <div className="relative m-5 sm:m-10 text-black dark:text-white py-6 px-4 sm:py-10 sm:px-5 flex flex-col items-center mx-10">
