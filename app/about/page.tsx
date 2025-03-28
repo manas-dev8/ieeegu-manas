@@ -71,31 +71,46 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-blue-800">Leadership Team</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-500">Photo</span>
-              </div>
-              <h3 className="font-bold">Prof. Anil Kumar</h3>
-              <p className="text-blue-600">Branch Counselor</p>
-            </div>
-            <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-500">Photo</span>
-              </div>
-              <h3 className="font-bold">Rishi Sharma</h3>
-              <p className="text-blue-600">Chairperson</p>
-            </div>
-            <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-500">Photo</span>
-              </div>
-              <h3 className="font-bold">Priya Mishra</h3>
-              <p className="text-blue-600">Vice-Chairperson</p>
-            </div>
-          </div>
-        </section>
+  <h2 className="text-2xl font-bold mb-4 text-blue-800">Leadership Team</h2>
+  <div className="grid md:grid-cols-3 gap-6">
+    <div className="text-center">
+      <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+        <img 
+          src="https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1741289813/Aanjey_wkazg5.jpg" 
+          alt="Dr. Aanjey Mani Tripathi" 
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <h3 className="font-bold">Dr. Aanjey Mani Tripathi</h3>
+      <p className="text-blue-600">Branch Counselor</p>
+    </div>
+
+    <div className="text-center">
+      <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+        <img 
+          src="https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005300/shubhranshu_hfxnd7.png" 
+          alt="Shubhranshu Shekhar Dash" 
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <h3 className="font-bold">Shubhranshu Shekhar Dash</h3>
+      <p className="text-blue-600">Chairperson</p>
+    </div>
+
+    <div className="text-center">
+      <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+        <img 
+          src="https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005302/anurag_brdjdq.png" 
+          alt="anurag" 
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <h3 className="font-bold">Anurag Kumar Singh</h3>
+      <p className="text-blue-600">Vice-Chairperson</p>
+    </div>
+  </div>
+</section>
+
 
         <section>
           <h2 className="text-2xl font-bold mb-4 text-blue-800">Our Achievements</h2>
