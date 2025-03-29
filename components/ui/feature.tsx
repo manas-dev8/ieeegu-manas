@@ -25,7 +25,7 @@ export default function FeaturesSectionDemo() {
     
   ];
   return (
-    <div className="relative z-20 pb-5 bg-white dark:bg-neutral-900 text-left lg:py-10 mx-5 p-2 sm:p-10 text-black dark:text-white mt-10">
+    <div className="relative z-20 pb-5 bg-transparent dark:bg-neutral-900 text-left lg:py-10 mx-5 p-2 sm:p-10 text-black dark:text-white mt-10">
       <div className="px-8">
         <p className="sm:text-sm lg:text-base max-w-7xl text-xs text-black dark:text-neutral-300 text-left sm:text-center font-normal">
           The IEEE Student Branch (SB) at Galgotias University is a vibrant community dedicated to fostering innovation, technical knowledge, and professional development among students passionate about engineering and technology. 
@@ -36,7 +36,7 @@ export default function FeaturesSectionDemo() {
       <div className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-6 mt-6 rounded-md gap-4">
           {features.map((feature) => (
-            <FeatureCard key={feature.title} className={`${feature.className} dark:bg-neutral-800 dark:text-white`}>
+            <FeatureCard key={feature.title} className={`${feature.className} dark:bg-black dark:text-white`}>
               <FeatureTitle>{feature.title}</FeatureTitle>
               <FeatureDescription className="dark:text-neutral-300">
                 {feature.description}
@@ -68,8 +68,6 @@ const FeatureCard = ({ children, className }: { children?: React.ReactNode; clas
 };
 
 export const SkeletonOne = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [pausePosition, setPausePosition] = useState(0);
 
   const [announcements, setAnnouncements] = useState<{ title: string; content: string; date: string }[]>([]);
   
@@ -108,40 +106,49 @@ React.useEffect(() => {
   setAnnouncements(mockAnnouncements);
 }, []);
 
-  return (
-    <div className="relative flex p-4 sm:p-6 mt-6 sm:mt-10 flex-col items-center gap-3 sm:gap-6 h-[50vh] sm:h-3/4 w-[90%] sm:w-full max-w-lg sm:max-w-4xl mx-auto overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-lg sm:rounded-xl shadow-lg sm:shadow-2xl">
-      <motion.div
-        className="flex flex-col text-left h-full w-full"
-        animate={isHovered ? { y: pausePosition } : { y: ["100%", "-100%"] }}
-        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-        onMouseEnter={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const offsetY = rect.top - e.clientY; // Save where the pause happened
-          setPausePosition(offsetY);
-          setIsHovered(true);
-        }}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {announcements.map((announcement, index) => (
-          <div key={index} className="mb-4">
-            <p className="text-xs sm:text-base font-semibold">• {announcement.title}</p>
-            <p className="text-xs sm:text-sm">{announcement.content}</p>
-            <p className="text-xs text-gray-300">{announcement.date}</p>
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  );
+return (
+  <div className="relative flex p-4 sm:p-6 mt-6 sm:mt-10 flex-col items-center gap-3 sm:gap-6 h-[50vh] sm:h-3/4 w-[90%] sm:w-full max-w-lg sm:max-w-4xl mx-auto overflow-hidden bg-gradient-to-r from-gray-600 via-black to-gray-800 text-white rounded-lg sm:rounded-xl shadow-lg sm:shadow-2xl">
+    <motion.div
+      className="flex flex-col text-left h-full w-full"
+      animate={{ y: ["100%", "-100%"] }}
+      transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+    >
+      {announcements.map((announcement, index) => (
+        <div key={index} className="mb-4">
+          <p className="text-xs sm:text-base font-semibold">• {announcement.title}</p>
+          <p className="text-xs sm:text-sm">{announcement.content}</p>
+          <p className="text-xs text-gray-300">{announcement.date}</p>
+        </div>
+      ))}
+    </motion.div>
+  </div>
+);
+
 };
 
 export const SkeletonTwo = () => {
   const images = [
    
    "https://res.cloudinary.com/dgna3swph/image/upload/t_Thumbnail/v1737884369/5c41699a-273b-4db6-8a48-6e4c00bcee8e_ljsyfh.jpg",
-   "https://res.cloudinary.com/dgna3swph/image/upload/t_Thumbnail/v1737884369/5c41699a-273b-4db6-8a48-6e4c00bcee8e_ljsyfh.jpg",
-   "https://res.cloudinary.com/dgna3swph/image/upload/t_Thumbnail/v1737884369/5c41699a-273b-4db6-8a48-6e4c00bcee8e_ljsyfh.jpg",
-   "https://res.cloudinary.com/dgna3swph/image/upload/t_Thumbnail/v1737884369/5c41699a-273b-4db6-8a48-6e4c00bcee8e_ljsyfh.jpg",
-   "https://res.cloudinary.com/dgna3swph/image/upload/t_Thumbnail/v1737884369/5c41699a-273b-4db6-8a48-6e4c00bcee8e_ljsyfh.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1741292911/SAM_3012_m7cesc.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1741289396/IMG-20250112-WA0217_hnunl6.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1741289132/DSC09852_blblck.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1741288700/DSC07262_wdff02.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737889513/IMG_1952_s6ss9m_jvkbjt.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884662/50ad2832-2063-4caf-b811-0a78249d26c1_blkpwl.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884517/DSC06982_jvyk0b.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884661/468e65ec-bfa2-4177-bc7e-6f8817f8e81b_rbp2ki.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884512/5c41699a-273b-4db6-8a48-6e4c00bcee8e_m1wtrh.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884371/ca6809dd-cb94-40cf-a312-06cbd2f2cab3_otohnk.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884370/IMG_2067_f3fvzg.heic",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884424/9b113fc3-0172-4254-8ef5-18bcee431e06_ifbizn.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884425/ee551988-89c4-4896-a346-a5e104bb9525_xyuqx6.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884513/57b6e758-3df3-40b5-af6e-d49bd07aeaf1_coned9.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884664/06a800b7-0f4e-4ecf-954b-df2926a77f21_grbwub.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1741287531/YS0_8171_iigcgb.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884664/06a800b7-0f4e-4ecf-954b-df2926a77f21_grbwub.jpg",
+   "https://res.cloudinary.com/dgna3swph/image/upload/v1737884662/50ad2832-2063-4caf-b811-0a78249d26c1_blkpwl.jpg",
+
   ];
 
   const imageVariants = {
@@ -157,10 +164,10 @@ export const SkeletonTwo = () => {
     },
   };
   return (
-    <div className="relative flex flex-col items-start p-8 gap-10 h-full  overflow-hidden">
+    <div className="relative flex flex-col items-start p-8 gap-10 h-full overflow-hidden">
       {/* First Row */}
       <div className="flex flex-row -ml-20">
-        {images.map((image, idx) => (
+        {images.slice(0, Math.ceil(images.length / 3)).map((image, idx) => (
           <motion.div
             key={"images-first" + idx}
             variants={imageVariants}
@@ -181,10 +188,10 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
-
+  
       {/* Second Row */}
       <div className="flex flex-row">
-        {images.map((image, idx) => (
+        {images.slice(Math.ceil(images.length / 3), Math.ceil((2 * images.length) / 3)).map((image, idx) => (
           <motion.div
             key={"images-second" + idx}
             style={{
@@ -205,10 +212,10 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
-
+  
       {/* Third Row */}
       <div className="flex flex-row -ml-20">
-        {images.map((image, idx) => (
+        {images.slice(Math.ceil((2 * images.length) / 3)).map((image, idx) => (
           <motion.div
             key={"images-third" + idx}
             variants={imageVariants}
@@ -229,7 +236,7 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
-
+  
       {/* Gradient Overlays */}
       <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white dark:from-neutral-800 to-transparent h-full pointer-events-none" />
       <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white dark:from-neutral-800 to-transparent h-full pointer-events-none" />
