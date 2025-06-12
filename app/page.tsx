@@ -5,7 +5,7 @@ import FeaturesSectionDemo from "@/components/ui/feature";
 import ScrollingBanner from "@/components/scrolling-banner";
 import { ImagesSliderDemo } from "@/components/imageslider";
 import Intro from "@/components/Intro";
-import { WorldMapDemo } from "@/components/world-mapcomp";
+// import { WorldMapDemo } from "@/components/world-mapcomp";
 import StudentBranchChapters from "@/components/sbc";
 
 export default function HomePage() {
@@ -22,7 +22,7 @@ export default function HomePage() {
             <Intro />
             <StudentBranchChapters />
             <FeaturesSectionDemo />
-            <WorldMapDemo />
+            {/* <WorldMapDemo /> */}
         </div>
     );
 }

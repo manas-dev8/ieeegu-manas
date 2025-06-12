@@ -8,6 +8,7 @@ interface Event {
   date: string;
   description: string;
   image: string;
+  eventURL?: string;
 }
 
 const EventsPage = () => {
@@ -21,31 +22,50 @@ const EventsPage = () => {
     height: 400,
   };
 
-  const upcomingEvents : Event[]= [
+  const upcomingEvents: Event[] = [
+    {
+      id: 'event-2',
+      title: "IEEE CS SYP TECH-X 2025",
+      date: "TBD",
+      description: "A Global IEEE CS SYP event that brings together students and young professionals from around the world to explore the latest advancements in technology, share knowledge, and foster innovation.",
+      image: "https://res.cloudinary.com/dgna3swph/image/upload/v1748269748/WhatsApp_Image_2025-05-26_at_19.58.24_30c2fed5_ykp5uu.jpg",
+      eventURL: "",
+    },
+
+
+  ];
+
+  const pastEvents = [
     {
       id: 'event-1',
       title: "ICCSAI YOUNG MINDS 2025",
       date: "April-2 to April-6, 2025",
       description: "A deep dive into artificial intelligence and machine learning, tailored for beginners and professionals.",
       image: "https://res.cloudinary.com/dgna3swph/image/upload/v1743015580/iccssai_jwx8ua.jpg",
+      eventURL: ``, // Example URL, adjust as needed
     },
-    
-    
-  ];
+    {
+      id: 'event-2',
+      title: "IEEE UP SECTION EXECOM MEET",
+      date: "MARCH 28, 2025",
+      description: "IEEE UP Section Execom Meet is a gathering of IEEE OFFICERS from the UP Section to discuss and plan activities.",
+      image: "https://res.cloudinary.com/dgna3swph/image/upload/c_crop,ar_3:4/v1741292919/SAM_3021_wgrp71.jpg",
+    },
+    {
+      id: 'event-3',
+      title: "IEEE DAY 2024",
+      date: "October-1 to October-8",
+      description: "IEEE DAY is a global celebration of the IEEE community, recognizing the contributions of IEEE members and their impact on technology and society.",
+      image: "https://res.cloudinary.com/dgna3swph/image/upload/c_crop,ar_3:4/v1737888463/IMG_1624_vjcw2f_ue1gh4.jpg",
+    },
+    {
+      id: 'event-4',
+      title: "ICCSAI YOUNG MINDS 2025",
+      date: "April-2 to April-6, 2025",
+      description: "A deep dive into artificial intelligence and machine learning, tailored for beginners and professionals.",
+      image: "https://res.cloudinary.com/dgna3swph/image/upload/v1743015580/iccssai_jwx8ua.jpg",
+    },
 
-  const pastEvents = [
-    {
-      title: "Women in Tech Meetup",
-      date: "June 20, 2023",
-      description: "Celebrating women in technology with inspiring stories and networking opportunities.",
-      image: "/events/women-in-tech.jpg",
-    },
-    {
-      title: "Robotics Workshop",
-      date: "May 15, 2023",
-      description: "Hands-on robotics sessions to empower enthusiasts with the latest advancements.",
-      image: "/events/robotics-workshop.jpg",
-    },
   ];
 
   return (
@@ -83,46 +103,85 @@ const EventsPage = () => {
       </section>
 
       <section className="mb-16">
-      <h2 className="text-2xl font-bold mb-6">Upcoming Events</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {upcomingEvents.map((event, index) => (
-          <div
-            key={index}
-            className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl m-4"
-          >
-            {/* Fully Visible Image */}
-            <div className="relative w-full">
-              <Image
-                src={event.image}
-                alt={event.title}
-                width={600} // Fixed width
-                height={400} // Fixed height
-                className="w-full h-auto object-contain"
-              />
-            </div>
+        <h2 className="text-2xl font-bold mb-6">Upcoming Events</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {upcomingEvents.map((event, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl m-4"
+            >
+              {/* Fully Visible Image */}
+              <div className="relative w-full">
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  width={600} // Fixed width
+                  height={400} // Fixed height
+                  className="w-full h-auto object-contain"
+                />
+              </div>
 
-            {/* Content Section */}
-            <div className="p-4">
-              <h3 className="text-lg font-bold mb-1">{event.title}</h3>
-              <p className="text-blue-600 dark:text-blue-400 text-sm mb-2 font-medium">
-                {event.date}
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-                {event.description}
-              </p>
-              <a href={`/events/${event.id}`} rel="noopener noreferrer">
-  <button className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">
-    Explore More
-  </button>
-</a>
+              {/* Content Section */}
+              <div className="p-4">
+                <h3 className="text-lg font-bold mb-1">{event.title}</h3>
+                <p className="text-blue-600 dark:text-blue-400 text-sm mb-2 font-medium">
+                  {event.date}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                  {event.description}
+                </p>
+                <a href={event.eventURL} rel="noopener noreferrer">
+                  <button className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">
+                    Explore More
+                  </button>
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
 
       {/* Past Events Section */}
-      <section>
+
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold mb-6">Past Events</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {pastEvents.map((event, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl m-4"
+            >
+              {/* Fully Visible Image */}
+              <div className="relative w-full">
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  width={600} // Fixed width
+                  height={400} // Fixed height
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="p-4">
+                <h3 className="text-lg font-bold mb-1">{event.title}</h3>
+                <p className="text-blue-600 dark:text-blue-400 text-sm mb-2 font-medium">
+                  {event.date}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                  {event.description}
+                </p>
+                <a href={event.eventURL} rel="noopener noreferrer">
+                  <button className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">
+                    Explore More
+                  </button>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+                  {/* <section>
         <h2 className="text-3xl font-bold mb-6">Past Events</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {pastEvents.map((event, index) => (
@@ -145,9 +204,9 @@ const EventsPage = () => {
             </div>
           ))}
         </div>
-      </section>
-    </div>
-  );
+      </section> */}
+              </div>
+              );
 };
 
-export default EventsPage;
+              export default EventsPage;
