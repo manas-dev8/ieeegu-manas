@@ -142,45 +142,46 @@ const EventsPage = () => {
       </section>
 
       {/* Past Events Section */}
+<section className="mb-16">
+  <h2 className="text-2xl font-bold mb-6">Past Events</h2>
 
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">Past Events</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {pastEvents.map((event, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl m-4"
-            >
-              {/* Fully Visible Image */}
-              <div className="relative w-full">
-                <Image
-                  src={event.image}
-                  alt={event.title}
-                  width={600} // Fixed width
-                  height={400} // Fixed height
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-
-              {/* Content Section */}
-              <div className="p-4">
-                <h3 className="text-lg font-bold mb-1">{event.title}</h3>
-                <p className="text-blue-600 dark:text-blue-400 text-sm mb-2 font-medium">
-                  {event.date}
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-                  {event.description}
-                </p>
-                <a href={event.eventURL} rel="noopener noreferrer">
-                  <button className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">
-                    Explore More
-                  </button>
-                </a>
-              </div>
-            </div>
-          ))}
+  <div className="overflow-x-scroll scrollbar-hide flex space-x-6 px-2">
+    {pastEvents.map((event, index) => (
+      <div
+        key={index}
+        className="min-w-[340px] max-w-[340px] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl"
+      >
+        {/* Larger Image */}
+        <div className="relative w-full h-[220px]">
+          <Image
+            src={event.image}
+            alt={event.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-t-xl"
+          />
         </div>
-      </section>
+
+        {/* Content */}
+        <div className="p-5">
+          <h3 className="text-xl font-bold mb-2">{event.title}</h3>
+          <p className="text-blue-600 dark:text-blue-400 text-sm mb-2 font-medium">
+            {event.date}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+            {event.description}
+          </p>
+          <a href={event.eventURL} rel="noopener noreferrer">
+            <button className="bg-blue-600 dark:bg-blue-700 text-white px-5 py-2 text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">
+              Explore More
+            </button>
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
                   {/* <section>
         <h2 className="text-3xl font-bold mb-6">Past Events</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

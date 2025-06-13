@@ -5,12 +5,11 @@ import FeaturesSectionDemo from "@/components/ui/feature";
 import ScrollingBanner from "@/components/scrolling-banner";
 import { ImagesSliderDemo } from "@/components/imageslider";
 import Intro from "@/components/Intro";
-// import { WorldMapDemo } from "@/components/world-mapcomp";
 import StudentBranchChapters from "@/components/sbc";
 
 export default function HomePage() {
     useEffect(() => {
-        document.documentElement.classList.add("dark"); // Ensure dark mode globally
+        document.documentElement.classList.add("dark"); 
     }, []);
 
     return (

@@ -185,3 +185,11 @@ body::-webkit-scrollbar-track {
 .blog-content .prose pre {
   @apply overflow-x-auto;
 }
+/* Tailwind custom utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
